@@ -5,6 +5,7 @@ import FastClick from 'fastclick'
 import store from './vuex'
 import router from './router'
 import App from './App'
+import initRichText from './common/richEditor'
 
 import { DatetimePlugin, BusPlugin, DevicePlugin, ToastPlugin, AlertPlugin, ConfirmPlugin, LoadingPlugin, WechatPlugin, AjaxPlugin } from 'vux'
 
@@ -20,6 +21,7 @@ Vue.use(BusPlugin)
 Vue.use(DatetimePlugin)
 Vue.prototype._wx = Vue.wechat
 
+initRichText()
 FastClick.attach(document.body)
 
 Vue.config.productionTip = false

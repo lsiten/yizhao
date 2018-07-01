@@ -10,7 +10,7 @@
 <script>
 import lHeader from '../components/com/header'
 import lbottom from '../components/com/bottom'
-import { ViewBox, querystring } from 'vux'
+import { ViewBox } from 'vux'
 import { mapGetters } from 'vuex'
 export default {
   name: 'home',
@@ -20,21 +20,7 @@ export default {
     ViewBox
   },
   created () {
-    let params = querystring.parse(window.location.search)
-    if (!params.id) {
-      this.$router.push({path: '/error'})
-      return ''
-    }
-    this.$store.dispatch('com_check_desk_id', params.id).then(data => {
-      this._initData()
-    }).catch(msg => {
-      this.$router.push({path: '/error',
-        query: {
-          errorMsg: msg
-        }}
-      )
-      return ''
-    })
+    this._initData()
   },
   destroyed () {
     this.$store.dispatch('com_clear_desk_info')

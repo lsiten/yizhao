@@ -5,7 +5,7 @@ const state = {
     backText: '返回', // 返回文字
     preventGoBack: false // 是否阻止返回
   },
-  title: '小仙女',
+  title: '一昭文化传播有限公司',
   showMore: false,
   showCenter: true,
   clickMore: () => {

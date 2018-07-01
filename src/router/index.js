@@ -18,17 +18,6 @@ export default new Router({
           path: '/home',
           component: resolve => require(['../pages/Home/index.vue'], resolve),
           meta: {title: '系统首页'}
-        },
-        {
-          path: '/order',
-          component: resolve => require(['../pages/Order/index.vue'], resolve),
-          meta: {title: '订单确认页面'}
-        },
-        {
-          path: '/orderlist',
-          name: 'orderlist',
-          component: resolve => require(['../pages/user/orderlist.vue'], resolve),
-          meta: {title: '订单确认页面'}
         }
       ]
     },
