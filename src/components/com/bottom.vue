@@ -44,7 +44,7 @@
       </div>
     </div>
     <div v-show="!showBottom">
-      <div v-show="bottomType">
+      <div v-show="bottomType === 'submit'">
         <div :class="'bottom_' + bottomType">
           <div class="food-price margin-left-15">
             ￥<span>{{foodPrice}}</span>
@@ -52,6 +52,15 @@
           <div class="right-content">
             <div class="submit-button-order" @click="submitOrderCommit">
               下单
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-show="bottomType === 'submit-artice'">
+        <div :class="'bottom_' + bottomType">
+          <div class="right-content">
+            <div class="submit-button" @click="submitArtice">
+              提交
             </div>
           </div>
         </div>
@@ -101,6 +110,8 @@ export default {
       totalNum: 'bottom_get_total',
       foodPrice: 'bottom_get_all_price',
       showBottom: 'bottom_get_show_bottom',
+      title: 'home_get_title',
+      content: 'home_get_content',
       bottomType: 'bottom_get_bottom_type'
     })
   },
@@ -211,6 +222,10 @@ export default {
       this.$nextTick(() => {
         this.foodsTemp = fTemp
       })
+    },
+    submitArtice () {
+      console.log(this.title)
+      console.log(this.content)
     }
   }
 }
@@ -328,6 +343,17 @@ export default {
 
   .margin-left-15 {
     margin-left: 15px;
+  }
+
+  .bottom_submit-artice {
+    position: absolute;
+    z-index: 999;
+    background: rgba(0, 0, 0, .8);
+    height: 46px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    color: #ffffff;
   }
 </style>
 <style>

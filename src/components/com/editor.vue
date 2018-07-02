@@ -60,9 +60,10 @@
               _this.editor.hideEditorControllerLayer()
             })
           },
-          changer: function (val) {
-            console.log(val)
-            _this.content = val
+          changer: function () {
+            // _this.content = val
+            let content = _this.editor.getContent()
+            _this.$emit('editorChange', content)
           },
           /* 自定义按钮的例子 */
           toolbars: [
@@ -96,3 +97,9 @@
     }
   }
 </script>
+<style scoped>
+  .com-contentEditor {
+    padding: 0 15px;
+  }
+</style>
+
