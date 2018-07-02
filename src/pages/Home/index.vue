@@ -1,15 +1,18 @@
 <template>
   <div style="height:100%;">
-    <vue-html5-editor :content="content" :height="400"  
-                          @change="updateData"></vue-html5-editor> 
+    <editor :content = 'content' :placeholder="placeholder"></editor>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import editor from '../../components/com/editor'
 export default {
   name: 'Home-index',
   computed: {
     ...mapGetters({})
+  },
+  components: {
+    editor
   },
   created () {
     this.$store.dispatch('bottom_set_show', false)
@@ -18,16 +21,11 @@ export default {
   },
   data () {
     return {
-      content: '请输入内容'
+      content: '请输入内容',
+      placeholder: '请输入内容'
     }
   },
   methods: {
-    updateData (e) {
-      this.content = e
-      console.info(e)
-    }
-  },
-  mounted () {
   }
 }
 </script>
