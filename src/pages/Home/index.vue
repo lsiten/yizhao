@@ -70,6 +70,7 @@ export default {
   padding-left: 15px;
   padding-bottom: 10px;
   border-bottom: 1px solid #f5e8e8;
+  border-top: 1px solid #f5e8e8;
 }
 </style>
 

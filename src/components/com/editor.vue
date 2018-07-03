@@ -4,8 +4,14 @@
   </div>
 </template>
 <script>
+  import uuid from 'uuid'
   export default {
     name: 'com-contentEditor',
+    data () {
+      return {
+        _imageUploader: null
+      }
+    },
     props: {
       content: {
         type: String,
@@ -21,16 +27,47 @@
         let _this = this
         this.editor = new window.Eleditor({
           el: '#contentEditor',
-          upload: {
-            server: '/',
-            // headers: {
-            //   'token': '123123'
-            // },
-            compress: false,
-            fileSizeLimit: 2
+          uploader: function () {
+            /* 必须返回一个Promise对象，成功返回url，失败返回错误信息 */
+            return new Promise(function (resolve, reject) {
+              _this.$store.dispatch('com_get_signature', {name: uuid()}).then(data => {
+                _this._imageUploader.on('uploadBeforeSend', function (block, formdata, headers) {
+                  console.log(block)
+                  formdata.key = data.key
+                  formdata.token = data.signature
+                })
+              })
+            })
           },
           /* 初始化完成钩子 */
           mounted: function () {
+            _this._imageUploader = window.WebUploader.create({
+              auto: true,
+              server: 'http://up.qiniu.com/',
+              /* 按钮类就是[Eleditor-你的自定义按钮id] */
+              pick: window.$('.Eleditor-insertImage'),
+              duplicate: true,
+              resize: false,
+              accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+              },
+              fileVal: 'image'
+            })
+            _this._imageUploader.on('uploadSuccess', function (_file, _call) {
+              if (parseInt(_call.status) === 0) {
+                return window.alert(_call.msg)
+              }
+              /* 保存状态，以便撤销 */
+              _this.editor.saveState()
+              _this.editor.getEditNode().after(`
+                <div class='Eleditor-video-area'>
+                  <video src="${_call.url}" controls="controls"></video>
+                </div>
+              `)
+              _this.editor.hideEditorControllerLayer()
+            })
             /* 以下是扩展插入视频的演示 */
             let _videoUploader = window.WebUploader.create({
               auto: true,
@@ -100,11 +137,14 @@
 <style scoped>
   .com-contentEditor {
     padding: 0 15px;
+    word-break: break-all;
+
   }
 </style>
 <style>
-  .com-contentEditor .Eleditor-mask {
+  .com-contentEditor .Eleditor-textEditor, .com-contentEditor .Eleditor-method {
     position: fixed;
+    z-index: 999;
   }
 </style>
 

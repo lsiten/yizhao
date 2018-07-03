@@ -1,10 +1,8 @@
 <template>
-  <div class="home-index" style="height:100%;">
-    <view-box ref="viewBox" body-padding-bottom="46px" body-padding-top="46px">
-      <l-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;"></l-header>
-      <router-view></router-view>
-      <l-bottom slot="bottom"></l-bottom>
-    </view-box>
+  <div class="home-index" style="padding-top: 46px; padding-bottom: 46px;overflow:hidden;overflow-y: scroll;">
+    <l-header slot="header" style="width:100%;position:fixed;left:0;top:0;z-index: 100"></l-header>
+    <router-view></router-view>
+    <l-bottom style="width:100%;position:fixed;left:0;bottom:0;z-index: 600"></l-bottom>
   </div>
 </template>
 <script>

@@ -24,7 +24,7 @@
       </div>
       <!-- 购物篮详情 -->
       <div v-transfer-dom>
-        <popup v-model="showDetail" position="bottom" max-height="100%" :popup-style="{'bottom': '46px', 'z-index': 998}">
+        <popup v-model="showDetail" position="bottom" max-height="100%" :popup-style="{'bottom': '46px', 'z-index': 10}">
           <div class="food-detail-content">
             <div class="food-detail-header-box">
               <span>已选商品</span>
@@ -311,7 +311,7 @@ export default {
 <style scoped>
   .com-bottom {
     position: absolute;
-    z-index: 999;
+    z-index: 11;
     background: rgba(0, 0, 0, .8);
     height: 46px;
     width: 100%;
@@ -321,7 +321,7 @@ export default {
   }
   .bottom_submit {
     position: absolute;
-    z-index: 999;
+    z-index: 600;
     background: rgba(0, 0, 0, .8);
     height: 46px;
     width: 100%;
@@ -425,7 +425,7 @@ export default {
 
   .bottom_submit-artice {
     position: absolute;
-    z-index: 999;
+    z-index: 600;
     background: rgba(0, 0, 0, .8);
     height: 46px;
     width: 100%;
@@ -484,7 +484,7 @@ export default {
     background: rgba(0, 0, 0, .8);
     color: #fff;
     padding: 5px 10px;
-    z-index: 999;
+    z-index: 600;
     border-radius: 5px;
   }
 </style>

@@ -67,6 +67,18 @@ const actions = {
   },
   com_set_first_loading ({ commit }, status) {
     commit(types.COM_SET_FIRST_LOADING, status)
+  },
+  com_get_signature ({ commit }, param) {
+    return new Promise((resolve, reject) => {
+      api.getImageToken(param).then(data => {
+        let code = parseInt(data.code)
+        if (code === 1) {
+          resolve(data.data)
+        } else {
+          reject(data.msg)
+        }
+      })
+    })
   }
 }
 
