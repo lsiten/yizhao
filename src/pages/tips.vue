@@ -4,8 +4,9 @@
     <msg :title="title" :description="description" :icon="icon"></msg>
     <div class="contact">
       <h3>联系我们：</h3>
-      <div class="title"><span>微信：</span> <img src = '../assets/wx.jpg' /></div>
-      <div class="phone"><span>电话：</span><span>18565884671</span></div>
+      <div class="title"><span>公众号：</span> <img src = '../assets/yigenanning.jpg' /></div>
+      <div class="title"><span>&nbsp;&nbsp;&nbsp;&nbsp;微信：</span> <img src = '../assets/wx.jpg' /></div>
+      <div class="phone"><span>&nbsp;&nbsp;&nbsp;&nbsp;电话：</span><span><a href="tel:18565884671">18565884671</a></span></div>
     </div>
   </div>
 </template>
