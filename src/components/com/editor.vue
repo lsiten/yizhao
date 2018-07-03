@@ -102,4 +102,10 @@
     padding: 0 15px;
   }
 </style>
+<style>
+  .com-contentEditor .Eleditor-mask {
+    position: fixed;
+  }
+</style>
+
 
