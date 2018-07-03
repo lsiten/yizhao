@@ -26,6 +26,12 @@ export default new Router({
       name: 'error',
       component: resolve => require(['../pages/error.vue'], resolve),
       meta: {title: '错误页面'}
+    },
+    {
+      path: '/tips',
+      name: 'tips',
+      component: resolve => require(['../pages/tips.vue'], resolve),
+      meta: {title: '提示页面'}
     }
   ]
 })

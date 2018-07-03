@@ -1,6 +1,8 @@
 <template>
   <div style="height:100%;">
     <x-input title="标题" v-model="articeTitle" placeholder="请输入文章标题"></x-input>
+    <x-input title="作者" v-model="articeAuthor" placeholder="请输入您的名字/笔名"></x-input>
+    <x-input title="微信号" v-model="articeWx" placeholder="请输入您的微信号"></x-input>
     <div class="input-title">文章内容：</div>
     <editor :content = 'content' @editorChange = 'editorChange' :placeholder="placeholder"></editor>
   </div>
@@ -27,13 +29,21 @@ export default {
   watch: {
     articeTitle () {
       this.$store.dispatch('home_set_title', this.articeTitle)
+    },
+    articeAuthor () {
+      this.$store.dispatch('home_set_author', this.articeAuthor)
+    },
+    articeWx () {
+      this.$store.dispatch('home_set_wx', this.articeWx)
     }
   },
   data () {
     return {
       content: '请输入内容',
       placeholder: '请输入内容',
-      articeTitle: ''
+      articeTitle: '',
+      articeAuthor: '',
+      articeWx: ''
     }
   },
   methods: {

@@ -9,7 +9,8 @@ const state = {
   bottomType: '',
   isInit: false,
   basketChange: false,
-  deleteFood: []
+  deleteFood: [],
+  agreement: 0
 }
 const getters = {
   bottom_get_shopping_basket: state => state.shoppingBasket,
@@ -20,7 +21,8 @@ const getters = {
   bottom_get_isinit: state => state.isInit,
   bottom_get_bottom_type: state => state.bottomType,
   bottom_get_delete_food: state => state.deleteFood,
-  bottom_get_basket_change: state => state.basketChange
+  bottom_get_basket_change: state => state.basketChange,
+  bottom_get_bottom_agreement: state => state.agreement
 }
 
 const mutations = {
@@ -93,6 +95,9 @@ const mutations = {
   },
   [types.BOTTOM_UPDATE_INIT_BASKET] (state, status) {
     state.isInit = status
+  },
+  [types.BOTTOM_UPDATE_ARGREEMENT] (state, agreement) {
+    state.agreement = agreement
   }
 }
 
@@ -139,6 +144,12 @@ const actions = {
   },
   bottom_set_type ({commit}, type) {
     commit(types.BOTTOM_SET_BOTTOM_TYPE, type)
+    return new Promise((resolve, reject) => {
+      resolve()
+    })
+  },
+  bottom_set_agreement ({commit}, agreement) {
+    commit(types.BOTTOM_UPDATE_ARGREEMENT, agreement)
     return new Promise((resolve, reject) => {
       resolve()
     })
