@@ -32,10 +32,10 @@
             return new Promise(function (resolve, reject) {
               _this.$store.dispatch('com_get_signature', {name: uuid()}).then(data => {
                 _this._imageUploader.on('uploadBeforeSend', function (block, formdata, headers) {
-                  console.log(block)
                   formdata.key = data.key
                   formdata.token = data.signature
                 })
+                _this._imageUploader.upload()
               })
             })
           },
@@ -53,25 +53,23 @@
                 extensions: 'gif,jpg,jpeg,bmp,png',
                 mimeTypes: 'image/*'
               },
-              fileVal: 'image'
+              fileVal: 'file'
             })
             _this._imageUploader.on('uploadSuccess', function (_file, _call) {
-              if (parseInt(_call.status) === 0) {
-                return window.alert(_call.msg)
+              if (_call.error) {
+                return window.alert(_call.error)
               }
               /* 保存状态，以便撤销 */
               _this.editor.saveState()
               _this.editor.getEditNode().after(`
-                <div class='Eleditor-video-area'>
-                  <video src="${_call.url}" controls="controls"></video>
-                </div>
+                <img src="${_call.key}" style='max-width:100%; height: auto'>
               `)
               _this.editor.hideEditorControllerLayer()
             })
             /* 以下是扩展插入视频的演示 */
-            let _videoUploader = window.WebUploader.create({
+            _this._videoUploader = window.WebUploader.create({
               auto: true,
-              server: '服务器地址',
+              server: 'http://up.qiniu.com/',
               /* 按钮类就是[Eleditor-你的自定义按钮id] */
               pick: window.$('.Eleditor-insertVideo'),
               duplicate: true,
@@ -81,9 +79,9 @@
                 extensions: 'mp4',
                 mimeTypes: 'video/mp4'
               },
-              fileVal: 'video'
+              fileVal: 'file'
             })
-            _videoUploader.on('uploadSuccess', function (_file, _call) {
+            _this._videoUploader.on('uploadSuccess', function (_file, _call) {
               if (parseInt(_call.status) === 0) {
                 return window.alert(_call.msg)
               }
@@ -119,6 +117,13 @@
                 // 回调返回选择的dom对象和控制按钮对象
                 /* 因为上传要提前绑定按钮到webuploader，所以这里不做上传逻辑，写在mounted */
                 /* !!!!!!返回false编辑面板不会关掉 */
+                _this.$store.dispatch('com_get_signature', {name: uuid() + '.mp4'}).then(data => {
+                  _this._videoUploader.on('uploadBeforeSend', function (block, formdata, headers) {
+                    formdata.key = data.key
+                    formdata.token = data.signature
+                  })
+                  _this._videoUploader.upload()
+                })
                 return false
               }
             },
@@ -138,13 +143,15 @@
   .com-contentEditor {
     padding: 0 15px;
     word-break: break-all;
-
   }
 </style>
 <style>
   .com-contentEditor .Eleditor-textEditor, .com-contentEditor .Eleditor-method {
     position: fixed;
     z-index: 999;
+  }
+  .com-contentEditor .Eleditor-delete-back {
+    margin-bottom: 46px;
   }
 </style>
 
