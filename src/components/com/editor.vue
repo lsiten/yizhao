@@ -141,7 +141,7 @@
 </script>
 <style scoped>
   .com-contentEditor {
-    padding: 0 15px;
+    padding: 0 15px 46px 15px;
     word-break: break-all;
   }
 </style>
@@ -152,6 +152,10 @@
   }
   .com-contentEditor .Eleditor-delete-back {
     margin-bottom: 46px;
+  }
+
+  .com-contentEditor .Eleditor-controller {
+    z-index: 999;
   }
 </style>
 
